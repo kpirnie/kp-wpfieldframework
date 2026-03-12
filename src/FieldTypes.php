@@ -684,7 +684,7 @@ if (! class_exists('\KP\WPFieldFramework\FieldTypes')) {
                 $checked,
                 esc_html($checkbox_label)
             );
-         }
+        }
 
         /**
          * Render a group of checkboxes.
