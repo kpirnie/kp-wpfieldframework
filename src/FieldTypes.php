@@ -676,8 +676,15 @@ if (! class_exists('\KP\WPFieldFramework\FieldTypes')) {
         {
             $checked = checked($value, true, false);
             $checkbox_label = $field['checkbox_label'] ?? '';
-            return sprintf('<label for="%s"><input type="checkbox" value="1"%s%s /> %s</label>', esc_attr($field['id']), $this->buildAttributes($field), $checked, esc_html($checkbox_label));
-        }
+            return sprintf(
+                '<label for="%s"><input type="hidden" name="%s" value="0" /><input type="checkbox" value="1"%s%s /> %s</label>',
+                esc_attr($field['id']),
+                esc_attr($field['name']),
+                $this->buildAttributes($field),
+                $checked,
+                esc_html($checkbox_label)
+            );
+         }
 
         /**
          * Render a group of checkboxes.
@@ -764,7 +771,9 @@ if (! class_exists('\KP\WPFieldFramework\FieldTypes')) {
             $html .= sprintf('<span class="kp-wsf-switch-label kp-wsf-switch-label--off">%s</span>', esc_html($off_label));
             $html .= '<label class="kp-wsf-switch">';
             $html .= sprintf(
+                '<input type="hidden" name="%s" value="0" />' .
                 '<input type="checkbox" id="%s" name="%s" value="1"%s />',
+                esc_attr($field['name']),
                 esc_attr($field['id']),
                 esc_attr($field['name']),
                 $checked ? ' checked="checked"' : ''

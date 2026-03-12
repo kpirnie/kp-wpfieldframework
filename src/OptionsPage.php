@@ -642,7 +642,7 @@ if (! class_exists('\KP\WPFieldFramework\OptionsPage')) {
                 $field = $all_fields[$field_id] ?? null;
                 if ($field) {
                     $type = $field['type'] ?? 'text';
-                    if (in_array($type, ['checkbox'], true) && !isset($input[$field_id])) {
+                    if (in_array($type, ['checkbox', 'switch'], true) && !isset($input[$field_id])) {
                         $sanitized[$field_id] = false;
                     }
                 }
