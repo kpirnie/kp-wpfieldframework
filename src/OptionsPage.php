@@ -458,7 +458,33 @@ if (! class_exists('\KP\WPFieldFramework\OptionsPage')) {
                     do_settings_sections($this->config['menu_slug']);
                 }
 
-                submit_button($this->config['save_button'] ?? __('Save Settings', 'kp-wsf'));
+                // get the tab config if we're in a tab
+                $tab_config = (!empty($current_tab) && !empty($this->config['tabs'][$current_tab]))
+                    ? $this->config['tabs'][$current_tab]
+                    : [];
+
+                // hide the button if configured
+                if (empty($tab_config['hide_save_button']) && empty($this->config['hide_save_button'])) {
+                    submit_button($this->config['save_button'] ?? __('Save Settings', 'kp-wsf'));
+                }
+
+                // if we have more buttons to add, add them
+                if (!empty($tab_config['buttons'])) {
+                    echo '<div class="kp-wsf-tab-buttons">';
+                    foreach ($tab_config['buttons'] as $btn) {
+                        $type  = esc_attr($btn['type']  ?? 'button');
+                        $label = esc_html($btn['label'] ?? '');
+                        $class = esc_attr($btn['class'] ?? 'button button-secondary');
+                        $id    = !empty($btn['id']) ? sprintf(' id="%s"', esc_attr($btn['id'])) : '';
+                        $attrs = '';
+                        foreach (($btn['attributes'] ?? []) as $attr => $val) {
+                            $attrs .= sprintf(' %s="%s"', esc_attr($attr), esc_attr($val));
+                        }
+                        echo "<button type=\"{$type}\" class=\"{$class}\"{$id}{$attrs}>{$label}</button>";
+                    }
+                    echo '</div>';
+                }
+
                 $this->renderExportImport();
                 ?>
             </form>
