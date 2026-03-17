@@ -100,7 +100,7 @@ if (! class_exists('\KP\WPFieldFramework\Loader')) {
          * @since  1.0.0
          * @return Framework      The initialized Framework instance.
          */
-        public static function init(): Framework
+        public static function init(): ?Framework
         {
 
         // make sure our requirements are met
@@ -190,7 +190,7 @@ if (! class_exists('\KP\WPFieldFramework\Loader')) {
          * @param  string $min_php_version Minimum PHP version required.
          * @return array                   Array with 'valid' bool and 'errors' array.
          */
-        private static function checkRequirements(string $min_wp_version = '6.8', string $min_php_version = '8.4'): array
+        private static function checkRequirements(string $min_wp_version = '6.8', string $min_php_version = '8.2'): array
         {
             $errors = array();
             // Check PHP version.
