@@ -364,7 +364,7 @@ if (! class_exists('\KP\WPFieldFramework\FieldTypes')) {
          */
         private function renderText(array $field, mixed $value): string
         {
-            $field['class'] = 'regular-text' . ( ! empty($field['class']) ? ' ' . $field['class'] : '' );
+            $field['class'] = 'regular-text' . (! empty($field['class']) ? ' ' . $field['class'] : '');
             return sprintf('<input type="text" value="%s"%s />', esc_attr((string) $value), $this->buildAttributes($field));
         }
 
@@ -378,7 +378,7 @@ if (! class_exists('\KP\WPFieldFramework\FieldTypes')) {
          */
         private function renderEmail(array $field, mixed $value): string
         {
-            $field['class'] = 'regular-text' . ( ! empty($field['class']) ? ' ' . $field['class'] : '' );
+            $field['class'] = 'regular-text' . (! empty($field['class']) ? ' ' . $field['class'] : '');
             return sprintf('<input type="email" value="%s"%s />', esc_attr((string) $value), $this->buildAttributes($field));
         }
 
@@ -392,7 +392,7 @@ if (! class_exists('\KP\WPFieldFramework\FieldTypes')) {
          */
         private function renderUrl(array $field, mixed $value): string
         {
-            $field['class'] = 'regular-text code' . ( ! empty($field['class']) ? ' ' . $field['class'] : '' );
+            $field['class'] = 'regular-text code' . (! empty($field['class']) ? ' ' . $field['class'] : '');
             return sprintf('<input type="url" value="%s"%s />', esc_attr((string) $value), $this->buildAttributes($field));
         }
 
@@ -406,7 +406,7 @@ if (! class_exists('\KP\WPFieldFramework\FieldTypes')) {
          */
         private function renderPassword(array $field, mixed $value): string
         {
-            $field['class'] = 'regular-text' . ( ! empty($field['class']) ? ' ' . $field['class'] : '' );
+            $field['class'] = 'regular-text' . (! empty($field['class']) ? ' ' . $field['class'] : '');
             return sprintf('<input type="password" value="%s"%s autocomplete="new-password" />', esc_attr((string) $value), $this->buildAttributes($field));
         }
 
@@ -420,7 +420,7 @@ if (! class_exists('\KP\WPFieldFramework\FieldTypes')) {
          */
         private function renderNumber(array $field, mixed $value): string
         {
-            $field['class'] = 'small-text' . ( ! empty($field['class']) ? ' ' . $field['class'] : '' );
+            $field['class'] = 'small-text' . (! empty($field['class']) ? ' ' . $field['class'] : '');
             // Add min/max/step if provided.
             if (isset($field['min'])) {
                 $field['attributes']['min'] = $field['min'];
@@ -445,7 +445,7 @@ if (! class_exists('\KP\WPFieldFramework\FieldTypes')) {
          */
         private function renderTel(array $field, mixed $value): string
         {
-            $field['class'] = 'regular-text' . ( ! empty($field['class']) ? ' ' . $field['class'] : '' );
+            $field['class'] = 'regular-text' . (! empty($field['class']) ? ' ' . $field['class'] : '');
             return sprintf('<input type="tel" value="%s"%s />', esc_attr((string) $value), $this->buildAttributes($field));
         }
 
@@ -476,7 +476,7 @@ if (! class_exists('\KP\WPFieldFramework\FieldTypes')) {
          */
         private function renderDate(array $field, mixed $value): string
         {
-            $field['class'] = 'regular-text kp-wsf-datepicker' . ( ! empty($field['class']) ? ' ' . $field['class'] : '' );
+            $field['class'] = 'regular-text kp-wsf-datepicker' . (! empty($field['class']) ? ' ' . $field['class'] : '');
             $field['attributes']['data-date-format'] = $field['date_format'] ?? 'yy-mm-dd';
             return sprintf('<input type="text" value="%s"%s />', esc_attr((string) $value), $this->buildAttributes($field));
         }
@@ -491,7 +491,7 @@ if (! class_exists('\KP\WPFieldFramework\FieldTypes')) {
          */
         private function renderDatetime(array $field, mixed $value): string
         {
-            $field['class'] = 'regular-text' . ( ! empty($field['class']) ? ' ' . $field['class'] : '' );
+            $field['class'] = 'regular-text' . (! empty($field['class']) ? ' ' . $field['class'] : '');
             return sprintf('<input type="datetime-local" value="%s"%s />', esc_attr((string) $value), $this->buildAttributes($field));
         }
 
@@ -505,7 +505,7 @@ if (! class_exists('\KP\WPFieldFramework\FieldTypes')) {
          */
         private function renderTime(array $field, mixed $value): string
         {
-            $field['class'] = 'small-text' . ( ! empty($field['class']) ? ' ' . $field['class'] : '' );
+            $field['class'] = 'small-text' . (! empty($field['class']) ? ' ' . $field['class'] : '');
             return sprintf('<input type="time" value="%s"%s />', esc_attr((string) $value), $this->buildAttributes($field));
         }
 
@@ -519,7 +519,7 @@ if (! class_exists('\KP\WPFieldFramework\FieldTypes')) {
          */
         private function renderWeek(array $field, mixed $value): string
         {
-            $field['class'] = 'small-text' . ( ! empty($field['class']) ? ' ' . $field['class'] : '' );
+            $field['class'] = 'small-text' . (! empty($field['class']) ? ' ' . $field['class'] : '');
             return sprintf('<input type="week" value="%s"%s />', esc_attr((string) $value), $this->buildAttributes($field));
         }
 
@@ -533,7 +533,7 @@ if (! class_exists('\KP\WPFieldFramework\FieldTypes')) {
          */
         private function renderMonth(array $field, mixed $value): string
         {
-            $field['class'] = 'small-text' . ( ! empty($field['class']) ? ' ' . $field['class'] : '' );
+            $field['class'] = 'small-text' . (! empty($field['class']) ? ' ' . $field['class'] : '');
             return sprintf('<input type="month" value="%s"%s />', esc_attr((string) $value), $this->buildAttributes($field));
         }
 
@@ -558,31 +558,35 @@ if (! class_exists('\KP\WPFieldFramework\FieldTypes')) {
             $url = $value['url'] ?? '';
             $title = $value['title'] ?? '';
             $target = $value['target'] ?? '';
+            $custom_class = ! empty($field['class']) ? ' ' . esc_attr($field['class']) : '';
 
             $html = '<div class="kp-wsf-link-field">';
 
             // URL input.
             $html .= sprintf(
-                '<input type="text" id="%s_url" name="%s[url]" value="%s" class="regular-text kp-wsf-link-url" placeholder="%s" />',
+                '<input type="text" id="%s_url" name="%s[url]" value="%s" class="regular-text kp-wsf-link-url %s" placeholder="%s" />',
                 esc_attr($field['id']),
                 esc_attr($field['name']),
                 esc_url($url),
+                $custom_class,
                 esc_attr__('URL', 'kp-wsf')
             );
 
             // Link button.
             $html .= sprintf(
-                ' <button type="button" class="button kp-wsf-link-select" data-target="%s">%s</button>',
+                ' <button type="button" class="button kp-wsf-link-select %s" data-target="%s">%s</button>',
                 esc_attr($field['id']),
+                $custom_class,
                 esc_html__('Select Link', 'kp-wsf')
             );
 
             // Title input.
             $html .= sprintf(
-                '<input type="text" id="%s_title" name="%s[title]" value="%s" class="regular-text kp-wsf-link-title" placeholder="%s" />',
+                '<input type="text" id="%s_title" name="%s[title]" value="%s" class="regular-text kp-wsf-link-title %s" placeholder="%s" />',
                 esc_attr($field['id']),
                 esc_attr($field['name']),
                 esc_attr($title),
+                $custom_class,
                 esc_attr__('Link Text', 'kp-wsf')
             );
 
@@ -766,16 +770,18 @@ if (! class_exists('\KP\WPFieldFramework\FieldTypes')) {
             $checked = filter_var($value, FILTER_VALIDATE_BOOLEAN);
             $on_label = $field['on_label'] ?? __('On', 'kp-wsf');
             $off_label = $field['off_label'] ?? __('Off', 'kp-wsf');
+            $custom_class = ! empty($field['class']) ? sprintf(' class="%s"', esc_attr($field['class'])) : '';
 
             $html = '<div class="kp-wsf-switch-field">';
             $html .= sprintf('<span class="kp-wsf-switch-label kp-wsf-switch-label--off">%s</span>', esc_html($off_label));
             $html .= '<label class="kp-wsf-switch">';
             $html .= sprintf(
                 '<input type="hidden" name="%s" value="0" />' .
-                '<input type="checkbox" id="%s" name="%s" value="1"%s />',
+                    '<input type="checkbox" id="%s" name="%s" value="1"%s%s />',
                 esc_attr($field['name']),
                 esc_attr($field['id']),
                 esc_attr($field['name']),
+                $custom_class,
                 $checked ? ' checked="checked"' : ''
             );
             $html .= '<span class="kp-wsf-switch-slider"></span>';
@@ -800,7 +806,7 @@ if (! class_exists('\KP\WPFieldFramework\FieldTypes')) {
          */
         private function renderTextarea(array $field, mixed $value): string
         {
-            $field['class'] = 'large-text' . ( ! empty($field['class']) ? ' ' . $field['class'] : '' );
+            $field['class'] = 'large-text' . (! empty($field['class']) ? ' ' . $field['class'] : '');
             $field['attributes']['rows'] = $field['rows'] ?? 5;
             $field['attributes']['cols'] = $field['cols'] ?? 50;
             return sprintf('<textarea%s>%s</textarea>', $this->buildAttributes($field), esc_textarea((string) $value));
@@ -826,6 +832,12 @@ if (! class_exists('\KP\WPFieldFramework\FieldTypes')) {
                     'quicktags'     => $field['quicktags'] ?? true,
                 )
             );
+
+            // Append the custom field class to the editor's textarea class.
+            if (! empty($field['class'])) {
+                $settings['editor_class'] = trim(($settings['editor_class'] ?? '') . ' ' . $field['class']);
+            }
+
             ob_start();
             wp_editor((string) $value, $field['id'], $settings);
             return ob_get_clean();
@@ -841,7 +853,7 @@ if (! class_exists('\KP\WPFieldFramework\FieldTypes')) {
          */
         private function renderCode(array $field, mixed $value): string
         {
-            $field['class'] = 'large-text code kp-wsf-code-editor' . ( ! empty($field['class']) ? ' ' . $field['class'] : '' );
+            $field['class'] = 'large-text code kp-wsf-code-editor' . (! empty($field['class']) ? ' ' . $field['class'] : '');
             $field['attributes']['rows'] = $field['rows'] ?? 10;
             $field['attributes']['data-code-type'] = $field['code_type'] ?? 'text/html';
             return sprintf('<textarea%s>%s</textarea>', $this->buildAttributes($field), esc_textarea((string) $value));
@@ -863,6 +875,8 @@ if (! class_exists('\KP\WPFieldFramework\FieldTypes')) {
         {
             $value = absint($value);
             $image_url = $value ? wp_get_attachment_image_url($value, 'thumbnail') : '';
+            $custom_class = ! empty($field['class']) ? ' ' . esc_attr($field['class']) : '';
+
             $html = '<div class="kp-wsf-image-field">';
             // Preview image.
             $html .= sprintf('<div class="kp-wsf-image-preview"%s>', $image_url ? '' : ' style="display:none;"');
@@ -871,7 +885,13 @@ if (! class_exists('\KP\WPFieldFramework\FieldTypes')) {
             }
             $html .= '</div>';
             // Hidden input for attachment ID.
-            $html .= sprintf('<input type="hidden" id="%s" name="%s" value="%s" class="kp-wsf-image-id" />', esc_attr($field['id']), esc_attr($field['name']), esc_attr($value ?: ''));
+            $html .= sprintf(
+                '<input type="hidden" id="%s" name="%s" value="%s" class="kp-wsf-image-id %s" />',
+                esc_attr($field['id']),
+                esc_attr($field['name']),
+                esc_attr($value ?: ''),
+                $custom_class
+            );
             // Buttons.
             $html .= '<p class="kp-wsf-image-buttons">';
             $html .= sprintf('<button type="button" class="button kp-wsf-upload-image">%s</button> ', esc_html__('Select Image', 'kp-wsf'));
@@ -894,16 +914,34 @@ if (! class_exists('\KP\WPFieldFramework\FieldTypes')) {
             $attachment_id = absint($value);
             $file_url = $attachment_id ? wp_get_attachment_url($attachment_id) : '';
             $filename = $file_url ? basename($file_url) : '';
+            $custom_class = ! empty($field['class']) ? ' ' . esc_attr($field['class']) : '';
+
             $html = '<div class="kp-wsf-file-field">';
             // File info display.
-            $html .= sprintf('<div class="kp-wsf-file-info"%s>', $file_url ? '' : ' style="display:none;"');
-            $html .= sprintf('<span class="kp-wsf-filename">%s</span>', esc_html($filename));
+            $html .= sprintf(
+                '<div class="kp-wsf-file-info"%s>',
+                $file_url ? '' : ' style="display:none;"'
+            );
+            $html .= sprintf(
+                '<span class="kp-wsf-filename">%s</span>',
+                esc_html($filename)
+            );
             if ($file_url) {
-                $html .= sprintf(' <a href="%s" target="_blank" class="kp-wsf-file-link">%s</a>', esc_url($file_url), esc_html__('View', 'kp-wsf'));
+                $html .= sprintf(
+                    ' <a href="%s" target="_blank" class="kp-wsf-file-link">%s</a>',
+                    esc_url($file_url),
+                    esc_html__('View', 'kp-wsf')
+                );
             }
             $html .= '</div>';
             // Hidden input for attachment ID.
-            $html .= sprintf('<input type="hidden" id="%s" name="%s" value="%s" class="kp-wsf-file-id" />', esc_attr($field['id']), esc_attr($field['name']), esc_attr($attachment_id ?: ''));
+            $html .= sprintf(
+                '<input type="hidden" id="%s" name="%s" value="%s" class="kp-wsf-file-id %s" />',
+                esc_attr($field['id']),
+                esc_attr($field['name']),
+                esc_attr($attachment_id ?: ''),
+                $custom_class
+            );
             // Buttons.
             $html .= '<p class="kp-wsf-file-buttons">';
             $html .= sprintf('<button type="button" class="button kp-wsf-upload-file">%s</button> ', esc_html__('Select File', 'kp-wsf'));
@@ -933,7 +971,7 @@ if (! class_exists('\KP\WPFieldFramework\FieldTypes')) {
                 }
                 $ids = array_filter($ids);
             }
-
+            $custom_class = ! empty($field['class']) ? ' ' . esc_attr($field['class']) : '';
             $html = '<div class="kp-wsf-gallery-field">';
             // Gallery preview container.
             $html .= '<div class="kp-wsf-gallery-preview">';
@@ -942,9 +980,9 @@ if (! class_exists('\KP\WPFieldFramework\FieldTypes')) {
                 if ($thumb_url) {
                     $html .= sprintf(
                         '<div class="kp-wsf-gallery-item" data-id="%d">' .
-                        '<img src="%s" alt="" />' .
-                        '<button type="button" class="kp-wsf-gallery-remove">&times;</button>' .
-                        '</div>',
+                            '<img src="%s" alt="" />' .
+                            '<button type="button" class="kp-wsf-gallery-remove">&times;</button>' .
+                            '</div>',
                         $id,
                         esc_url($thumb_url)
                     );
@@ -952,11 +990,24 @@ if (! class_exists('\KP\WPFieldFramework\FieldTypes')) {
             }
             $html .= '</div>';
             // Hidden input for IDs.
-            $html .= sprintf('<input type="hidden" id="%s" name="%s" value="%s" class="kp-wsf-gallery-ids" />', esc_attr($field['id']), esc_attr($field['name']), esc_attr(implode(',', $ids)));
+            $html .= sprintf(
+                '<input type="hidden" id="%s" name="%s" value="%s" class="kp-wsf-gallery-ids %s" />',
+                esc_attr($field['id']),
+                esc_attr($field['name']),
+                esc_attr(implode(',', $ids)),
+                $custom_class
+            );
             // Buttons.
             $html .= '<p class="kp-wsf-gallery-buttons">';
-            $html .= sprintf('<button type="button" class="button kp-wsf-add-gallery">%s</button> ', esc_html__('Add Images', 'kp-wsf'));
-            $html .= sprintf('<button type="button" class="button kp-wsf-clear-gallery"%s>%s</button>', empty($ids) ? ' style="display:none;"' : '', esc_html__('Clear Gallery', 'kp-wsf'));
+            $html .= sprintf(
+                '<button type="button" class="button kp-wsf-add-gallery">%s</button> ',
+                esc_html__('Add Images', 'kp-wsf')
+            );
+            $html .= sprintf(
+                '<button type="button" class="button kp-wsf-clear-gallery"%s>%s</button>',
+                empty($ids) ? ' style="display:none;"' : '',
+                esc_html__('Clear Gallery', 'kp-wsf')
+            );
             $html .= '</p>';
             $html .= '</div>';
             return $html;
@@ -976,7 +1027,7 @@ if (! class_exists('\KP\WPFieldFramework\FieldTypes')) {
          */
         private function renderColor(array $field, mixed $value): string
         {
-            $field['class'] = 'kp-wsf-color-picker' . ( ! empty($field['class']) ? ' ' . $field['class'] : '' );
+            $field['class'] = 'kp-wsf-color-picker' . (! empty($field['class']) ? ' ' . $field['class'] : '');
             if (! empty($field['default'])) {
                 $field['attributes']['data-default-color'] = $field['default'];
             }
@@ -1027,7 +1078,7 @@ if (! class_exists('\KP\WPFieldFramework\FieldTypes')) {
             );
             $field['options'] = array();
             foreach ($posts as $post) {
-                $field['options'][ $post->ID ] = $post->post_title;
+                $field['options'][$post->ID] = $post->post_title;
             }
 
             return $this->renderSelect($field, $value);
@@ -1053,7 +1104,7 @@ if (! class_exists('\KP\WPFieldFramework\FieldTypes')) {
             $field['options'] = array();
             if (! is_wp_error($terms)) {
                 foreach ($terms as $term) {
-                    $field['options'][ $term->term_id ] = $term->name;
+                    $field['options'][$term->term_id] = $term->name;
                 }
             }
 
@@ -1082,7 +1133,7 @@ if (! class_exists('\KP\WPFieldFramework\FieldTypes')) {
             $users = get_users($args);
             $field['options'] = array();
             foreach ($users as $user) {
-                $field['options'][ $user->ID ] = $user->display_name;
+                $field['options'][$user->ID] = $user->display_name;
             }
 
             return $this->renderSelect($field, $value);
@@ -1117,9 +1168,16 @@ if (! class_exists('\KP\WPFieldFramework\FieldTypes')) {
         private function renderHeading(array $field, mixed $value): string
         {
             $tag = $field['tag'] ?? 'h3';
-            $allowed_tags = array( 'h1', 'h2', 'h3', 'h4', 'h5', 'h6' );
+            $allowed_tags = array('h1', 'h2', 'h3', 'h4', 'h5', 'h6');
             $tag = in_array($tag, $allowed_tags, true) ? $tag : 'h3';
-            return sprintf('<%s class="kp-wsf-heading">%s</%s>', $tag, esc_html($field['label']), $tag);
+            $custom_class = ! empty($field['class']) ? ' ' . $field['class'] : '';
+            return sprintf(
+                '<%s class="kp-wsf-heading%s">%s</%s>',
+                $tag,
+                esc_attr($custom_class),
+                esc_html($field['label']),
+                $tag
+            );
         }
 
         /**
@@ -1132,7 +1190,11 @@ if (! class_exists('\KP\WPFieldFramework\FieldTypes')) {
          */
         private function renderSeparator(array $field, mixed $value): string
         {
-            return '<hr class="kp-wsf-separator" />';
+            $custom_class = ! empty($field['class']) ? ' ' . $field['class'] : '';
+            return sprintf(
+                '<hr class="kp-wsf-separator%s" />',
+                esc_attr($custom_class)
+            );
         }
 
         /**
@@ -1145,7 +1207,12 @@ if (! class_exists('\KP\WPFieldFramework\FieldTypes')) {
          */
         private function renderHtml(array $field, mixed $value): string
         {
-            return wp_kses_post($field['content'] ?? '');
+            $custom_class = ! empty($field['class']) ? ' ' . $field['class'] : '';
+            return sprintf(
+                '<div class="kp-wsf-html%s">%s</div>',
+                esc_attr($custom_class),
+                wp_kses_post($field['content'] ?? '')
+            );
         }
 
         /**
@@ -1159,9 +1226,15 @@ if (! class_exists('\KP\WPFieldFramework\FieldTypes')) {
         private function renderMessage(array $field, mixed $value): string
         {
             $type = $field['message_type'] ?? 'info';
-            $allowed_types = array( 'info', 'success', 'warning', 'error' );
+            $allowed_types = array('info', 'success', 'warning', 'error');
             $type = in_array($type, $allowed_types, true) ? $type : 'info';
-            return sprintf('<div class="notice notice-%s inline"><p>%s</p></div>', esc_attr($type), wp_kses_post($field['content'] ?? ''));
+            $custom_class = ! empty($field['class']) ? ' ' . $field['class'] : '';
+            return sprintf(
+                '<div class="notice notice-%s inline%s"><p>%s</p></div>',
+                esc_attr($type),
+                esc_attr($custom_class),
+                wp_kses_post($field['content'] ?? '')
+            );
         }
 
         // =========================================================================
@@ -1201,8 +1274,14 @@ if (! class_exists('\KP\WPFieldFramework\FieldTypes')) {
 
             $conditional_attrs = $this->buildConditionalAttributes($field);
             $conditional_class = !empty($field['conditional']) ? ' kp-wsf-conditional-field' : '';
+            $custom_class = !empty($field['class']) ? ' ' . esc_attr($field['class']) : '';
 
-            $html = '<div class="kp-wsf-group' . $conditional_class . '"' . $conditional_attrs . '>';
+            $html = sprintf(
+                '<div class="kp-wsf-group%s%s"%s>',
+                $conditional_class,
+                $custom_class,
+                $conditional_attrs
+            );
             if (!empty($field['label'])) {
                 $html .= sprintf('<h4 class="kp-wsf-group-title">%s</h4>', esc_html($field['label']));
             }
@@ -1210,8 +1289,9 @@ if (! class_exists('\KP\WPFieldFramework\FieldTypes')) {
             if (!empty($field['description'])) {
                 $html .= $this->renderDescription($field);
             }
+            $custom_class = !empty($field['class']) ? ' ' . esc_attr($field['class']) : '';
 
-            $html .= '<div class="kp-wsf-group-fields">';
+            $html .= '<div class="kp-wsf-group-fields %s">';
             foreach ($sub_fields as $sub_field) {
                 $sub_field_id = $sub_field['id'];
                 $sub_field['name'] = $field['name'] . '[' . $sub_field_id . ']';
@@ -1257,12 +1337,17 @@ if (! class_exists('\KP\WPFieldFramework\FieldTypes')) {
             $value = is_array($value) ? $value : [];
             $sub_fields = $field['fields'] ?? [];
             $open = !empty($field['open']) ? ' kp-wsf-accordion--open' : '';
-
+            $custom_class = !empty($field['class']) ? ' ' . esc_attr($field['class']) : '';
             $conditional_attrs = $this->buildConditionalAttributes($field);
             $conditional_class = !empty($field['conditional']) ? ' kp-wsf-conditional-field' : '';
 
-            $html = '<div class="kp-wsf-accordion' . $open . $conditional_class . '"' . $conditional_attrs . '>';
-
+            $html = sprintf(
+                '<div class="kp-wsf-accordion%s%s%s"%s>',
+                $open,
+                $conditional_class,
+                $custom_class,
+                $conditional_attrs
+            );
             $html .= '<div class="kp-wsf-accordion__header">';
             $html .= sprintf('<span class="kp-wsf-accordion__title">%s</span>', esc_html($field['label'] ?? ''));
             if (!empty($field['sublabel'])) {

@@ -98,12 +98,13 @@ if (! class_exists('\KP\WPFieldFramework\Loader')) {
          * - Initializes the Framework singleton
          *
          * @since  1.0.0
+         * @param string $id The consumer identifier (plugin or theme slug)
          * @return Framework      The initialized Framework instance.
          */
-        public static function init(): ?Framework
+        public static function init(string $id = 'kpff'): ?Framework
         {
 
-        // make sure our requirements are met
+            // make sure our requirements are met
             $requirements = self::checkRequirements();
             if (!$requirements['valid']) {
                 self::displayRequirementErrors($requirements['errors']);
@@ -115,8 +116,8 @@ if (! class_exists('\KP\WPFieldFramework\Loader')) {
                 self::register();
             }
 
-            // Get the Framework singleton.
-            $framework = Framework::getInstance();
+            // Get the Framework instance for this consumer.
+            $framework = Framework::getInstance($id);
 
             // Initialize if not already done.
             if (!$framework->isInitialized()) {
@@ -176,7 +177,7 @@ if (! class_exists('\KP\WPFieldFramework\Loader')) {
                 return;
             }
 
-            spl_autoload_register(array( self::class, 'autoload' ));
+            spl_autoload_register(array(self::class, 'autoload'));
             self::$autoloader_registered = true;
         }
 

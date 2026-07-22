@@ -70,7 +70,7 @@ if (! class_exists('\KP\WPFieldFramework\MetaBox')) {
         private array $defaults = array(
             'id'           => '',
             'title'        => 'Meta Box',
-            'post_types'   => array( 'post' ),
+            'post_types'   => array('post'),
             'context'      => 'normal',
             'priority'     => 'default',
             'fields'       => array(),
@@ -213,7 +213,7 @@ if (! class_exists('\KP\WPFieldFramework\MetaBox')) {
         public function register(): void
         {
             foreach ($this->getPostTypes() as $post_type) {
-                add_meta_box($this->config['id'], $this->config['title'], array( $this, 'render' ), $post_type, $this->config['context'], $this->config['priority']);
+                add_meta_box($this->config['id'], $this->config['title'], array($this, 'render'), $post_type, $this->config['context'], $this->config['priority']);
             }
         }
 
@@ -253,7 +253,7 @@ if (! class_exists('\KP\WPFieldFramework\MetaBox')) {
             // Verify nonce.
             $nonce_name = $this->config['id'] . '_nonce';
             $nonce_action = $this->config['id'] . '_nonce_action';
-            if (! isset($_POST[ $nonce_name ]) || ! wp_verify_nonce($_POST[ $nonce_name ], $nonce_action)) {
+            if (! isset($_POST[$nonce_name]) || ! wp_verify_nonce($_POST[$nonce_name], $nonce_action)) {
                 return;
             }
 
@@ -274,13 +274,13 @@ if (! class_exists('\KP\WPFieldFramework\MetaBox')) {
             foreach ($this->fields as $field) {
                 $field_id = $field['id'];
                 // Skip layout-only fields.
-                $layout_types = array( 'heading', 'separator', 'html', 'message' );
+                $layout_types = array('heading', 'separator', 'html', 'message');
                 if (in_array($field['type'] ?? 'text', $layout_types, true)) {
                     continue;
                 }
 
                 // Get submitted value.
-                $value = $_POST[ $field_id ] ?? null;
+                $value = $_POST[$field_id] ?? null;
                 // Sanitize value.
                 $sanitized_value = $sanitizer->sanitize($value, $field);
                 // Update or delete meta.
@@ -329,7 +329,7 @@ if (! class_exists('\KP\WPFieldFramework\MetaBox')) {
             // Verify nonce.
             $nonce_name = $this->config['id'] . '_nonce';
             $nonce_action = $this->config['id'] . '_nonce_action';
-            if (! isset($_POST[ $nonce_name ]) || ! wp_verify_nonce($_POST[ $nonce_name ], $nonce_action)) {
+            if (! isset($_POST[$nonce_name]) || ! wp_verify_nonce($_POST[$nonce_name], $nonce_action)) {
                 return;
             }
 
@@ -343,13 +343,13 @@ if (! class_exists('\KP\WPFieldFramework\MetaBox')) {
             foreach ($this->fields as $field) {
                 $field_id = $field['id'];
                 // Skip layout-only fields.
-                $layout_types = array( 'heading', 'separator', 'html', 'message' );
+                $layout_types = array('heading', 'separator', 'html', 'message');
                 if (in_array($field['type'] ?? 'text', $layout_types, true)) {
                     continue;
                 }
 
                 // Get submitted value.
-                $value = $_POST[ $field_id ] ?? null;
+                $value = $_POST[$field_id] ?? null;
                 // Sanitize value.
                 $sanitized_value = $sanitizer->sanitize($value, $field);
                 // Update or delete user meta.
@@ -371,11 +371,11 @@ if (! class_exists('\KP\WPFieldFramework\MetaBox')) {
          */
         public function renderNavMenuFields(int $item_id, \WP_Post $item): void
         {
-            // Output nonce field (only once per menu).
-            static $nonce_output = false;
-            if (! $nonce_output) {
+            // Output nonce field (only once per menu, per meta box).
+            static $nonce_output = array();
+            if (empty($nonce_output[$this->config['id']])) {
                 wp_nonce_field($this->config['id'] . '_nonce_action', $this->config['id'] . '_nonce');
-                $nonce_output = true;
+                $nonce_output[$this->config['id']] = true;
             }
 
             echo '<div class="kp-wsf-nav-menu-fields">';
@@ -413,7 +413,7 @@ if (! class_exists('\KP\WPFieldFramework\MetaBox')) {
             // Verify nonce.
             $nonce_name = $this->config['id'] . '_nonce';
             $nonce_action = $this->config['id'] . '_nonce_action';
-            if (! isset($_POST[ $nonce_name ]) || ! wp_verify_nonce($_POST[ $nonce_name ], $nonce_action)) {
+            if (! isset($_POST[$nonce_name]) || ! wp_verify_nonce($_POST[$nonce_name], $nonce_action)) {
                 return;
             }
 
@@ -423,13 +423,13 @@ if (! class_exists('\KP\WPFieldFramework\MetaBox')) {
                 $field_id = $field['id'] . '_' . $menu_item_id;
                 $meta_key = $field['id'];
                 // Skip layout-only fields.
-                $layout_types = array( 'heading', 'separator', 'html', 'message' );
+                $layout_types = array('heading', 'separator', 'html', 'message');
                 if (in_array($field['type'] ?? 'text', $layout_types, true)) {
                     continue;
                 }
 
                 // Get submitted value.
-                $value = $_POST[ $field_id ] ?? null;
+                $value = $_POST[$field_id] ?? null;
                 // Sanitize value.
                 $sanitized_value = $sanitizer->sanitize($value, $field);
                 // Update or delete meta.

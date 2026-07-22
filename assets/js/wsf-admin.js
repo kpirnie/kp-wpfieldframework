@@ -56,7 +56,7 @@
          * @return {void}
          */
         initMultiSelector: function () {
-            $("select[multiple='multiple']").select2({ width: '100%', placeholder: "Select an option..." });
+            $(".kp-wsf-field__input select[multiple='multiple'], .kp-wsf-field-row select[multiple='multiple']").select2({ width: '100%', placeholder: "Select an option..." });
         },
 
         /**
@@ -1231,7 +1231,7 @@
                 url: kpWsfAdmin.ajaxUrl,
                 type: 'POST',
                 data: {
-                    action: 'kp_wsf_export_settings',
+                    action: kpWsfAdmin.exportAction || 'kp_wsf_export_settings',
                     nonce: kpWsfAdmin.nonce,
                     menu_slug: menuSlug
                 },
@@ -1293,7 +1293,7 @@
                     url: kpWsfAdmin.ajaxUrl,
                     type: 'POST',
                     data: {
-                        action: 'kp_wsf_import_settings',
+                        action: kpWsfAdmin.importAction || 'kp_wsf_import_settings',
                         nonce: kpWsfAdmin.nonce,
                         menu_slug: menuSlug,
                         json: e.target.result

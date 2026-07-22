@@ -77,9 +77,16 @@ if (! class_exists('\KP\WPFieldFramework\Repeater')) {
             $collapsed = $field['collapsed'] ?? false;
             $sortable = $field['sortable'] ?? true;
             $row_label = $field['row_label'] ?? __('Row', 'kp-wsf');
+            $custom_class = ! empty($field['class']) ? ' ' . $field['class'] : '';
 
             // Build HTML.
-            $html = sprintf('<div class="kp-wsf-repeater" data-min-rows="%d" data-max-rows="%d" data-field-id="%s">', $min_rows, $max_rows, esc_attr($field['id']));
+            $html = sprintf(
+                '<div class="kp-wsf-repeater %s" data-min-rows="%d" data-max-rows="%d" data-field-id="%s">',
+                $custom_class,
+                $min_rows,
+                $max_rows,
+                esc_attr($field['id'])
+            );
 
             // Repeater header.
             if (!empty($field['label']) || !empty($field['description'])) {
@@ -193,7 +200,7 @@ if (! class_exists('\KP\WPFieldFramework\Repeater')) {
                 $sub_field_name = $field['name'] . '[' . $row_index . '][' . $sub_field['id'] . ']';
 
                 // Get value for this sub-field.
-                $sub_value = $row_data[ $sub_field['id'] ] ?? ( $sub_field['default'] ?? null );
+                $sub_value = $row_data[$sub_field['id']] ?? ($sub_field['default'] ?? null);
 
                 // Clone sub-field config with updated ID and name.
                 $sub_field_config = array_merge(
@@ -290,8 +297,8 @@ if (! class_exists('\KP\WPFieldFramework\Repeater')) {
                 $sanitized_row = array();
                 foreach ($sub_fields as $sub_field) {
                     $sub_field_id = $sub_field['id'];
-                    if (isset($row_data[ $sub_field_id ])) {
-                        $sanitized_row[ $sub_field_id ] = $sanitizer->sanitize($row_data[ $sub_field_id ], $sub_field);
+                    if (isset($row_data[$sub_field_id])) {
+                        $sanitized_row[$sub_field_id] = $sanitizer->sanitize($row_data[$sub_field_id], $sub_field);
                     }
                 }
 
@@ -317,7 +324,7 @@ if (! class_exists('\KP\WPFieldFramework\Repeater')) {
          */
         public static function getValue(array $repeater_data, int $row_index, string $field_id, mixed $default = null): mixed
         {
-            return $repeater_data[ $row_index ][ $field_id ] ?? $default;
+            return $repeater_data[$row_index][$field_id] ?? $default;
         }
 
         /**
@@ -332,8 +339,8 @@ if (! class_exists('\KP\WPFieldFramework\Repeater')) {
         {
             $values = array();
             foreach ($repeater_data as $row) {
-                if (isset($row[ $field_id ])) {
-                    $values[] = $row[ $field_id ];
+                if (isset($row[$field_id])) {
+                    $values[] = $row[$field_id];
                 }
             }
 
